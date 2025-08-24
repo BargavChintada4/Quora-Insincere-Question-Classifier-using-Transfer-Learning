@@ -4,8 +4,6 @@
 
 A project to classify Quora questions as sincere or insincere using Transfer Learning by comparing various pre-trained text embedding models from TensorFlow Hub.
 
-**Project Link:** [https://github.com/YourUsername/YourRepoName](https://github.com/YourUsername/YourRepoName) ---
-
 ### Table of Contents
 1.  [Project Objectives](#project-objectives)
 2.  [Methodology](#methodology)
