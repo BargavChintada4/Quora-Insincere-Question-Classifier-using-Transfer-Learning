@@ -1,54 +1,87 @@
 # Quora Insincere Question Classifier using Transfer Learning
 
-This project demonstrates an efficient approach to classifying Quora questions as sincere or insincere using various pre-trained text embedding models from TensorFlow Hub. The primary technique employed is transfer learning, where we leverage powerful, pre-trained models to generate numerical representations (embeddings) of text data, which are then used to train a simple downstream classifier.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### Project Overview
+A project to classify Quora questions as sincere or insincere using Transfer Learning by comparing various pre-trained text embedding models from TensorFlow Hub.
 
-The goal is to build a binary classifier that can accurately identify insincere questions on the Quora platform. Insincere questions are defined as those intended to make a statement rather than seeking genuine answers.
+**Project Link:** [https://github.com/YourUsername/YourRepoName](https://github.com/YourUsername/YourRepoName) ---
 
-This implementation focuses on comparing the performance of five different text embedding models by:
-1.  **Pre-computing embeddings** for the entire dataset for each model. This is a highly efficient workflow as the computationally expensive feature extraction step is performed only once.
-2.  Training a separate, simple neural network classifier on these pre-computed numerical embeddings.
+### Table of Contents
+1.  [Project Objectives](#project-objectives)
+2.  [Methodology](#methodology)
+3.  [Results](#results)
+4.  [How to Run the Project](#how-to-run-the-project)
+5.  [Certification](#certification)
+6.  [License](#license)
 
-### Models Compared
+---
 
-The following pre-trained text embedding models from TensorFlow Hub were used and evaluated:
-* **GNews Swivel (20-dim)**: `https://tfhub.dev/google/tf2-preview/gnews-swivel-20dim/1`
-* **NNLM (50-dim)**: `https://tfhub.dev/google/tf2-preview/nnlm-en-dim50/1`
-* **NNLM (128-dim)**: `https://tfhub.dev/google/tf2-preview/nnlm-en-dim128/1`
-* **Universal Sentence Encoder (USE)**: `https://tfhub.dev/google/universal-sentence-encoder/4`
-* **Universal Sentence Encoder - Large**: `https://tfhub.dev/google/universal-sentence-encoder-large/5`
+### Project Objectives
+
+The primary goal of this project is to build an accurate and efficient binary classifier to identify insincere questions on the Quora platform. The project focuses on:
+-   **Leveraging Transfer Learning:** Utilizing powerful, pre-trained NLP models to generate high-quality text embeddings.
+-   **Model Comparison:** Systematically comparing the performance of five different text embedding models from TensorFlow Hub to determine the most effective one for this task.
+-   **Efficient Workflow:** Implementing an optimized workflow by pre-computing embeddings to significantly speed up the training of the downstream classifier.
+
+---
 
 ### Methodology
 
-1.  **Dataset**: The project uses the [Quora Insincere Questions Classification dataset](https://www.kaggle.com/c/quora-insincere-questions-classification). The data is loaded directly from an online source.
-2.  **Preprocessing**: A small subset of the data (1% for training, 0.1% for validation) is used for demonstration and quick experimentation.
-3.  **Embedding Generation**: For each of the five models, a `hub.KerasLayer` is used to convert the text questions from the training and validation sets into fixed-size numerical vectors. The pre-trained layers are kept frozen (`trainable=False`).
-4.  **Classifier Architecture**: A simple feed-forward neural network is built to perform the classification on the generated embeddings. The architecture consists of:
-    * An Input Layer with a shape corresponding to the embedding dimension (e.g., 512 for USE).
-    * A Dense hidden layer with 256 neurons (`ReLU` activation).
-    * A Dense hidden layer with 64 neurons (`ReLU` activation).
-    * A Sigmoid output layer for binary classification.
-5.  **Training**: Each classifier is trained on its corresponding embeddings using the `Adam` optimizer, `BinaryCrossentropy` loss, and `BinaryAccuracy` metric. Early stopping is employed to prevent overfitting.
+The process is broken down into two main stages: feature extraction and classification.
 
-### How to Run
+1.  **Dataset**: The project uses the [Quora Insincere Questions Classification dataset](https://www.kaggle.com/c/quora-insincere-questions-classification). For rapid prototyping, a stratified 1% sample is used for training and a 0.1% sample for validation.
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <your-repo-url>
-    cd <your-repo-name>
-    ```
-2.  **Install dependencies:** Make sure you have TensorFlow, TensorFlow Hub, Pandas, and Scikit-learn installed.
-    ```bash
-    pip install tensorflow tensorflow-hub pandas scikit-learn tensorflow-docs
-    ```
-3.  **Run the Jupyter Notebook:** Launch and run the cells in `Transfer_Learning_NLP_97_.ipynb`.
+2.  **Embedding Generation (Feature Extraction)**: The core of the project involves converting text questions into numerical vectors. Five pre-trained models from TensorFlow Hub were used for this, with their weights frozen (`trainable=False`):
+    -   `gnews-swivel-20dim`
+    -   `nnlm-en-dim50`
+    -   `nnlm-en-dim128`
+    -   `universal-sentence-encoder-4`
+    -   `universal-sentence-encoder-large-5`
+
+3.  **Classifier Architecture**: A simple but effective feed-forward neural network is trained on top of the pre-computed embeddings.
+    -   **Input Layer**: Shape matches the embedding dimension of the chosen model.
+    -   **Hidden Layers**: Two `Dense` layers with 256 and 64 neurons respectively (`ReLU` activation).
+    -   **Output Layer**: A `Dense` layer with a single neuron and `Sigmoid` activation for binary classification.
+
+The full implementation can be found in the Jupyter Notebook: [`Transfer_Learning_NLP_97_.ipynb`](./Transfer_Learning_NLP_97_.ipynb).
+
+---
 
 ### Results
 
-The performance of each model was tracked and plotted.
+The performance of each model was tracked, and the results clearly indicate that the quality of embeddings is the most critical factor.
 
-* **Accuracy**: The models based on the **Universal Sentence Encoder (USE)** achieved the highest validation accuracy (~97%), converging in fewer epochs than the other models.
-* **Loss**: The USE models also demonstrated the lowest validation loss, indicating better generalization on unseen data.
+-   **Highest Accuracy**: The models based on the **Universal Sentence Encoder (USE)** achieved the highest validation accuracy, reaching approximately **95%**.
+-   **Fastest Convergence**: The USE-based models also converged in far fewer epochs and achieved the lowest validation loss, demonstrating superior generalization.
 
-This experiment shows the power of using high-quality pre-trained embeddings for NLP tasks, allowing for the creation of high-performance models with minimal training time and computational resources.
+For a detailed analysis and visualizations, please see the full [**Project Report**](./REPORT.md).
+
+---
+
+### How to Run the Project
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/YourUsername/YourRepoName.git](https://github.com/YourUsername/YourRepoName.git)
+    cd YourRepoName
+    ```
+2.  **Install dependencies:**
+    ```bash
+    pip install tensorflow tensorflow-hub pandas scikit-learn tensorflow-docs
+    ```
+3.  **Run the Jupyter Notebook:**
+    Launch Jupyter and run all cells in `Transfer_Learning_NLP_97_.ipynb`.
+
+---
+
+### Certification
+
+This project was developed as part of my learning journey in Natural Language Processing. The skills applied here were solidified through the **[Name of Your Coursera Course/Specialization]** certification.
+
+**[View My Certificate]**([YOUR_CERTIFICATE_LINK])
+
+---
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
