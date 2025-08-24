@@ -42,7 +42,7 @@ The following pre-trained text embedding models from TensorFlow Hub were used an
     ```bash
     pip install tensorflow tensorflow-hub pandas scikit-learn tensorflow-docs
     ```
-3.  **Run the Jupyter Notebook:** Launch and run the cells in `Transfer_Learning_NLP_97_.ipynb`.
+3.  **Run the Jupyter Notebook:** Launch and run the cells in `Transfer_Learning_NLP_96.ipynb`.
 
 ### Results
 
