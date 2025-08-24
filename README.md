@@ -48,7 +48,7 @@ The following pre-trained text embedding models from TensorFlow Hub were used an
 
 The performance of each model was tracked and plotted.
 
-* **Accuracy**: The models based on the **Universal Sentence Encoder (USE)** achieved the highest validation accuracy (~95%), converging in fewer epochs than the other models.
+* **Accuracy**: The models based on the **Universal Sentence Encoder (USE)** achieved the highest validation accuracy (~97%), converging in fewer epochs than the other models.
 * **Loss**: The USE models also demonstrated the lowest validation loss, indicating better generalization on unseen data.
 
 This experiment shows the power of using high-quality pre-trained embeddings for NLP tasks, allowing for the creation of high-performance models with minimal training time and computational resources.
